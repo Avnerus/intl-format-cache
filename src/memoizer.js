@@ -21,7 +21,8 @@ function createFormatCache(FormatConstructor) {
         var format  = cacheId && cache[cacheId];
 
         if (!format) {
-            format = new (bind.apply(FormatConstructor, [null].concat(args)))();
+            var boundFunc = bind.apply(FormatConstructor, [null].concat(args));
+            format = new boundFunc();
 
             if (cacheId) {
                 cache[cacheId] = format;
